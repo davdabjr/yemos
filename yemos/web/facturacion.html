@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Facturación - Yemos</title>
+  <link href="style.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="images/logo.png" />
+
+  <style>
+  body {
+    background: #ffffff;
+    font-family: 'Inter', sans-serif;
+  }
+  /* Eliminado efecto de burbujas */
+
+  /* Estilos generales del portal */
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+</style>
+</head>
+
+<body class="text-stone-800 font-sans">
+
+  <!-- Fondo de burbujas -->
+  <div id="bubbles-container"></div>
+
+  <header class="bg-white/80 backdrop-blur shadow-md sticky top-0 z-50 border-b border-stone-200 text-stone-800">
+    <nav class="max-w-7xl mx-auto flex justify-between items-center p-5">
+      <div class="flex items-center space-x-2">
+        <img src="images/logo.png" alt="Yemos Logo" class="w-9 h-9">
+        <h1 class="text-2xl font-bold text-[#3A5A40]">Yemos</h1>
+      </div>
+
+      <ul class="hidden md:flex space-x-8 items-center font-medium">
+        <li><a href="portal-cliente.html" class="hover:text-[#D97706]">Inicio</a></li>
+        <li><a href="servicios.html" class="hover:text-[#D97706]">Servicios</a></li>
+        <li><a href="tickets.html" class="hover:text-[#D97706]">Tickets</a></li>
+        <li><a href="perfil.html" class="hover:text-[#D97706]">Mi perfil</a></li>
+        <li><a href="logout.html" class="btn-cobre">Cerrar sesión</a></li>
+      </ul>
+
+      <button class="md:hidden text-2xl text-stone-800" id="menu-btn">☰</button>
+    </nav>
+
+    <div id="mobile-menu" class="hidden bg-white md:hidden p-4 space-y-2 border-t border-stone-200 text-stone-800">
+      <a href="portal-cliente.html" class="block hover:text-[#D97706]">Inicio</a>
+      <a href="servicios.html" class="block hover:text-[#D97706]">Servicios</a>
+      <a href="tickets.html" class="block hover:text-[#D97706]">Tickets</a>
+      <a href="perfil.html" class="block hover:text-[#D97706]">Mi perfil</a>
+      <a href="logout.html" class="btn-cobre block text-center">Cerrar sesión</a>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-6 relative z-10">
+    <h2 class="text-4xl font-bold mb-4 text-[#3A5A40]">Facturación</h2>
+    <p class="text-stone-600 mb-8">Consulta tus facturas, créditos y métodos de pago.</p>
+
+    <!-- RESUMEN DE FACTURACIÓN -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-lg font-semibold mb-1">Créditos actuales</h3>
+        <p class="text-3xl font-bold text-[#3A5A40]">0.00</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-lg font-semibold mb-1">Facturas pendientes</h3>
+        <p class="text-3xl font-bold text-red-600">2</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-lg font-semibold mb-1">Total facturado este mes</h3>
+        <p class="text-3xl font-bold text-[#D97706]">€ 128.00</p>
+      </div>
+    </section>
+
+    <!-- LISTADO DE FACTURAS -->
+    <section class="bg-white rounded-xl shadow-md p-6 mb-10">
+      <h3 class="text-2xl font-semibold mb-4">Listado de facturas</h3>
+
+      <table class="w-full text-left text-sm">
+        <thead>
+          <tr class="text-stone-600 border-b">
+            <th class="py-2">Factura</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Importe</th>
+            <th class="text-right">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="text-stone-700">
+          <tr class="border-b hover:bg-stone-50">
+            <td class="py-3">#F-2025-001</td>
+            <td>10/01/2025</td>
+            <td><span class="px-2 py-1 rounded-full text-xs bg-red-100 text-red-700">Pendiente</span></td>
+            <td>€ 64.00</td>
+            <td class="text-right"><a class="text-[#D97706] hover:underline" href="#">Ver</a></td>
+          </tr>
+
+          <tr class="border-b hover:bg-stone-50">
+            <td class="py-3">#F-2025-002</td>
+            <td>02/01/2025</td>
+            <td><span class="px-2 py-1 rounded-full text-xs bg-green-100 text-green-700">Pagada</span></td>
+            <td>€ 32.00</td>
+            <td class="text-right"><a class="text-[#D97706] hover:underline" href="#">Ver</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- MÉTODOS DE PAGO -->
+    <section class="bg-white rounded-xl shadow-md p-6 mb-10">
+      <h3 class="text-2xl font-semibold mb-4">Métodos de pago</h3>
+
+      <div class="space-y-4">
+        <div class="flex items-center justify-between p-4 border rounded-lg">
+          <div>
+            <p class="font-medium">Visa terminada en 1234</p>
+            <p class="text-sm text-stone-500">Expira: 08/27</p>
+          </div>
+          <button class="px-3 py-1 rounded bg-red-500 text-white text-sm">Eliminar</button>
+        </div>
+
+        <button class="btn-cobre px-5 py-2 rounded-full">Añadir método de pago</button>
+      </div>
+    </section>
+
+    <!-- HISTORIAL DE CRÉDITOS -->
+    <section class="bg-white rounded-xl shadow-md p-6 mb-10">
+      <h3 class="text-2xl font-semibold mb-4">Historial de créditos</h3>
+
+      <table class="w-full text-left text-sm">
+        <thead>
+          <tr class="text-stone-600 border-b">
+            <th class="py-2">Fecha</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+          </tr>
+        </thead>
+        <tbody class="text-stone-700">
+          <tr class="border-b hover:bg-stone-50">
+            <td class="py-3">05/01/2025</td>
+            <td>Compra de créditos</td>
+            <td>+50</td>
+          </tr>
+
+          <tr class="border-b hover:bg-stone-50">
+            <td class="py-3">03/01/2025</td>
+            <td>Descuento por servicio</td>
+            <td>-20</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Métodos de Pago -->
+  <section class="payment-methods bg-white p-6 rounded-xl shadow-sm border mb-6">
+    <h2 class="section-title">Métodos de Pago</h2>
+    <p class="text-gray-600 mb-4">Gestiona cómo quieres pagar tus facturas.</p>
+    <button class="px-4 py-2 bg-gray-900 text-white rounded-lg">Añadir método de pago</button>
+  </section>
+
+  <!-- Historial de Facturación -->
+  <section class="billing-history bg-white p-6 rounded-xl shadow-sm border mb-6">
+    <h2 class="section-title">Historial de Facturación</h2>
+    <p class="text-gray-600 mb-4">Consulta todas tus facturas por año y mes.</p>
+    <div class="flex gap-4 mb-4">
+      <select class="border p-2 rounded-lg">
+        <option>Año 2025</option>
+        <option>Año 2024</option>
+        <option>Año 2023</option>
+      </select>
+      <select class="border p-2 rounded-lg">
+        <option>Enero</option>
+        <option>Febrero</option>
+        <option>Marzo</option>
+      </select>
+    </div>
+    <table class="w-full text-left border-collapse">
+      <thead>
+        <tr class="border-b">
+          <th class="py-2">Fecha</th>
+          <th class="py-2">Descripción</th>
+          <th class="py-2">Importe</th>
+          <th class="py-2">Estado</th>
+          <th class="py-2">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b">
+          <td class="py-2">15/01/2025</td>
+          <td>Mantenimiento Servidor</td>
+          <td>120€</td>
+          <td><span class="text-green-600 font-semibold">Pagado</span></td>
+          <td><button class="underline">Descargar PDF</button></td>
+        </tr>
+        <tr class="border-b">
+          <td class="py-2">01/01/2025</td>
+          <td>Servicio Web</td>
+          <td>560€</td>
+          <td><span class="text-red-600 font-semibold">Pendiente</span></td>
+          <td><button class="underline">Descargar PDF</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Gráfica Histórica -->
+  <section class="billing-chart bg-white p-6 rounded-xl shadow-sm border mb-6">
+    <h2 class="section-title">Gasto Histórico</h2>
+    <p class="text-gray-600 mb-4">Visualiza la evolución de tus pagos a lo largo del tiempo.</p>
+    <div class="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center text-gray-500">
+      (Gráfica próximamente)
+    </div>
+  </section>
+
+  <!-- Datos de Facturación -->
+  <section class="billing-data bg-white p-6 rounded-xl shadow-sm border mb-6">
+    <h2 class="section-title">Datos de Facturación</h2>
+    <p class="text-gray-600 mb-4">Edita tus datos fiscales y de contacto.</p>
+    <button class="px-4 py-2 bg-gray-900 text-white rounded-lg">Actualizar datos</button>
+  </section>
+
+  <!-- Sistema de Créditos -->
+  <section class="credits bg-white p-6 rounded-xl shadow-sm border mb-6">
+    <h2 class="section-title">Créditos</h2>
+    <p class="text-gray-600 mb-4">Consulta y recarga tus créditos para servicios Yemos.</p>
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-gray-700">Créditos disponibles:</p>
+        <p class="text-3xl font-bold text-green-700">320</p>
+      </div>
+      <button class="px-4 py-2 bg-green-600 text-white rounded-lg">Recargar créditos</button>
+    </div>
+  </section>
+</main>

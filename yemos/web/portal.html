@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal del Cliente - Yemos</title>
+  <link href="style.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="yemi/yemi.css" />
+</head>
+
+
+<body class="bg-stone-50 text-stone-800 font-sans">
+
+  <!-- Header igual que index -->
+  <header class="bg-white shadow-md sticky top-0 z-50 border-b border-stone-200">
+    <nav class="max-w-6xl mx-auto flex justify-between items-center p-4">
+      <div class="flex items-center space-x-2">
+        <img src="images/logo.png" alt="Yemos Logo" class="w-8 h-8">
+        <h1 class="text-2xl font-bold text-[#3A5A40]">Yemos</h1>
+      </div>
+
+      <ul class="hidden md:flex space-x-6 items-center">
+        <li><a href="#" class="hover:text-[#D97706]">Inicio</a></li>
+        <li><a href="#servicios" class="hover:text-[#D97706]">Servicios</a></li>
+        <li><a href="#perfil" class="hover:text-[#D97706]">Mi perfil</a></li>
+        <li><a href="#soporte" class="hover:text-[#D97706]">Soporte</a></li>
+        <li><a href="logout.html" class="btn-cobre">Cerrar sesión</a></li>
+      </ul>
+
+      <button class="md:hidden text-2xl" id="menu-btn">☰</button>
+    </nav>
+
+    <div id="mobile-menu" class="hidden bg-white md:hidden p-4 space-y-2 border-t border-stone-200">
+      <a href="#" class="block hover:text-[#D97706]">Inicio</a>
+      <a href="#servicios" class="block hover:text-[#D97706]">Servicios</a>
+      <a href="#perfil" class="block hover:text-[#D97706]">Mi perfil</a>
+      <a href="#soporte" class="block hover:text-[#D97706]">Soporte</a>
+      <a href="logout.html" class="btn-cobre block text-center">Cerrar sesión</a>
+    </div>
+  </header>
+
+
+
+  <main class="max-w-6xl mx-auto p-6">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h2 class="text-3xl font-bold text-[#3A5A40]">Portal del Empleado</h2>
+        <p class="text-stone-600">Área personal — Accede a tus recursos y servicios.</p>
+      </div>
+
+      <div class="space-x-2">
+        <button id="emergency-open" 
+          class="inline-block px-4 py-2 text-sm font-semibold rounded-full 
+            bg-red-500 text-white shadow-md hover:bg-red-600 
+            transition-all duration-200">
+          ⚠ Emergencias
+        </button>
+      </div>
+    </div>
+
+
+    <!-- Grid principal -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 min-h-[75vh]">
+
+      <!-- Columna izquierda -->
+      <div class="col-span-1 space-y-6">
+
+        <!-- Mi cuenta -->
+        <div class="bg-white p-4 rounded-lg shadow card-anim">
+          <h3 class="font-semibold text-lg mb-2">Mi cuenta</h3>
+          <p class="text-sm text-stone-600">Nombre: <strong>Juan Pérez</strong></p>
+          <p class="text-sm text-stone-600">Rol: <strong>Técnico</strong></p>
+          <p class="text-sm text-stone-600">Último acceso: <strong>Hoy</strong></p>
+        </div>
+
+        <!-- Facturación -->
+        <div class="bg-white p-4 rounded-lg shadow card-anim">
+          <h3 class="font-semibold text-lg mb-2">Facturación</h3>
+          <p class="text-sm text-stone-600 mb-3">Balance actual: <strong>Créditos:  0.00</strong></p>
+          <a href="#facturacion" class="inline-block btn-cobre">Ver facturas</a>
+        </div>
+
+        <!-- Tickets recientes -->
+        <div class="bg-white p-4 rounded-lg shadow card-anim">
+          <h3 class="font-semibold text-lg mb-2">Tickets recientes</h3>
+          <ul class="text-sm text-stone-600 list-disc list-inside">
+            <li>Incidencia con correo — <span class="text-stone-500">Abierto</span></li>
+            <li>Solicitud VM — <span class="text-stone-500">Cerrado</span></li>
+          </ul>
+        </div>
+
+        <!-- Notificaciones internas -->
+        <div class="bg-white p-4 rounded-lg shadow card-anim">
+          <h3 class="font-semibold text-lg mb-2">Notificaciones internas</h3>
+          <div class="space-y-3 text-sm text-stone-600">
+            <div class="p-3 rounded bg-stone-50 border">🔧 Mantenimiento programado — 20/02</div>
+            <div class="p-3 rounded bg-stone-50 border">📢 Nuevo módulo disponible</div>
+            <div class="p-3 rounded bg-stone-50 border">🛡 Actualización de seguridad aplicada</div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Columna central y derecha -->
+      <div class="col-span-1 md:col-span-2 space-y-6">
+
+        <!-- Servicios -->
+        <div class="bg-white p-6 rounded-lg shadow card-anim" id="servicios">
+          <h3 class="font-semibold text-xl mb-4">Servicios</h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="services-list">
+
+            <div class="p-4 rounded border flex items-start justify-between card-anim">
+              <div>
+                <h4 class="font-medium">Hosting - cliente123</h4>
+                <p class="text-sm text-stone-600">Servidor web compartido</p>
+              </div>
+              <div class="text-right space-y-1">
+                <span class="inline-block px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Activo</span>
+                <span class="block text-xs text-stone-500">Producción</span>
+              </div>
+            </div>
+
+            <div class="p-4 rounded border flex items-start justify-between card-anim">
+              <div>
+                <h4 class="font-medium">Base de datos - cliente123</h4>
+                <p class="text-sm text-stone-600">Postgres gestionado</p>
+              </div>
+              <div class="text-right space-y-1">
+                <span class="inline-block px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Mantenimiento</span>
+                <span class="block text-xs text-stone-500">Producción</span>
+              </div>
+            </div>
+
+            <div class="p-4 rounded border flex items-start justify-between card-anim">
+              <div>
+                <h4 class="font-medium">Tickets</h4>
+                <p class="text-sm text-stone-600">Incidencias y solicitudes activas</p>
+              </div>
+              <div class="text-right space-y-1">
+                <span class="inline-block px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Ver</span>
+                <span class="block text-xs text-stone-500">Soporte</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Gráfico -->
+        <div class="bg-white p-6 rounded-lg shadow card-anim">
+          <h3 class="font-semibold text-xl mb-4">Tickets gestionados — últimos 6 meses</h3>
+          <canvas id="ticketsChart" height="120"></canvas>
+        </div>
+
+
+        <!-- Facturación -->
+        <div id="facturacion" class="bg-white p-6 rounded-lg shadow card-anim">
+          <h3 class="font-semibold text-xl mb-4">Facturación</h3>
+          <table class="w-full text-left text-sm">
+            <thead>
+              <tr class="text-stone-600">
+                <th>Factura</th>
+                <th>Fecha</th>
+                <th>Importe</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#2025-001</td>
+                <td>2025-01-15</td>
+                <td>€ 120.00</td>
+                <td><span class="inline-block px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Pagado</span></td>
+              </tr>
+              <tr>
+                <td>#2025-002</td>
+                <td>2025-02-12</td>
+                <td>€ 80.00</td>
+                <td><span class="inline-block px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Pendiente</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+
+
+
+  <footer class="bg-[#3A5A40] text-stone-200 text-center py-6 mt-10">
+    <p>&copy; 2025 Yemos. Sembramos innovación.</p>
+  </footer>
+
+
+
+
+  <!-- Modal Emergencias -->
+  <div id="emergency-modal" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h4 class="font-semibold text-lg">Contacto de Emergencias</h4>
+        <button id="emergency-close" class="text-stone-500">✖</button>
+      </div>
+      <p class="mb-3 text-stone-600">En caso de incidencia crítica usa estos canales:</p>
+
+      <div class="space-y-3">
+        <div class="p-3 rounded border">
+          <p class="text-sm">Teléfono</p>
+          <a href="tel:+34622931803" class="font-medium">+34 622 93 18 03</a>
+        </div>
+        <div class="p-3 rounded border">
+          <p class="text-sm">Correo</p>
+          <a href="mailto:emergencias@yemos.com" class="font-medium">emergencias@yemos.es</a>
+        </div>
+      </div>
+
+      <div class="mt-4 text-right">
+        <button id="emergency-close-2" class="btn-cobre">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Scripts -->
+  <script>
+    // Menú móvil
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    // Modal emergencias
+    const emergencyOpen = document.getElementById('emergency-open');
+    const emergencyModal = document.getElementById('emergency-modal');
+    const emergencyClose = document.getElementById('emergency-close');
+    const emergencyClose2 = document.getElementById('emergency-close-2');
+
+    emergencyOpen?.addEventListener('click', () => {
+      emergencyModal.classList.remove('hidden');
+      emergencyModal.classList.add('flex');
+    });
+
+    function closeEmergency() {
+      emergencyModal.classList.add('hidden');
+      emergencyModal.classList.remove('flex');
+    }
+
+    emergencyClose?.addEventListener('click', closeEmergency);
+    emergencyClose2?.addEventListener('click', closeEmergency);
+
+    emergencyModal?.addEventListener('click', (e) => {
+      if (e.target === emergencyModal) closeEmergency();
+    });
+
+
+    // Tarjetas animadas
+    document.querySelectorAll(".card-anim").forEach(card => {
+      card.classList.add("transition", "duration-300");
+      card.addEventListener("mouseenter", () => {
+        card.classList.add("shadow-lg", "scale-[1.02]");
+      });
+      card.addEventListener("mouseleave", () => {
+        card.classList.remove("shadow-lg", "scale-[1.02]");
+      });
+    });
+
+
+    // ChartJS — gráfico de tickets
+    const ctx = document.getElementById('ticketsChart');
+    if (ctx) {
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Oct', 'Nov', 'Dic', 'Ene', 'Feb', 'Mar'],
+          datasets: [{
+            label: 'Tickets',
+            data: [12, 19, 8, 15, 22, 17],
+            borderWidth: 2,
+            borderColor: '#3A5A40',
+            backgroundColor: 'rgba(58, 90, 64, 0.2)',
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+  </script>
+
+
+  <!-- Yemi -->
+  <script src="yemi/yemi.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <title>Yemos - Soluciones Informáticas</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS (animaciones on scroll) -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- Iconos (opcional) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+
+</head>
+<body class="antialiased bg-stone-50 text-stone-800 font-sans">
+
+  <!-- NAVBAR -->
+  <header id="site-header" class="w-full fixed top-0 z-50 transition-colors">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between p-4 md:p-6 bg-white/90 backdrop-blur-sm rounded-b-md shadow-sm">
+      <div class="flex items-center gap-3">
+        <img src="images/logo.png" alt="Yemos" class="w-9 h-9 object-contain">
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold text-[#3A5A40] leading-tight">Yemos</h1>
+          <p class="text-xs text-stone-500 -mt-1">Soluciones Informáticas</p>
+        </div>
+      </div>
+
+      <ul class="hidden md:flex items-center gap-6 text-sm">
+        <li><a href="#inicio" class="nav-link">Inicio</a></li>
+        <li><a href="#servicios" class="nav-link">Servicios</a></li>
+        <li><a href="#sobre" class="nav-link">Sobre Nosotros</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+        <li><a href="login.html" class="btn-cobre px-4 py-2 rounded-md">Acceso Clientes</a></li>
+      </ul>
+
+      <button id="menu-btn" class="md:hidden p-2 rounded-md hover:bg-stone-100 transition">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow border-t">
+      <div class="flex flex-col p-4 gap-2">
+        <a href="#inicio" class="py-2 px-2 rounded hover:bg-stone-100">Inicio</a>
+        <a href="#servicios" class="py-2 px-2 rounded hover:bg-stone-100">Servicios</a>
+        <a href="#sobre" class="py-2 px-2 rounded hover:bg-stone-100">Sobre Nosotros</a>
+        <a href="#contacto" class="py-2 px-2 rounded hover:bg-stone-100">Contacto</a>
+        <a href="login.html" class="btn-cobre w-full text-center py-2 rounded">Acceso Clientes</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" class="pt-28 pb-20">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div data-aos="fade-right" data-aos-duration="700">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-[#0f261b] leading-tight">Donde nacen tus soluciones digitales</h2>
+        <p class="mt-4 text-stone-700 max-w-2xl">Sembramos innovación a través de desarrollo, integraciones y ciberseguridad — soluciones limpias, seguras y pensadas para crecer.</p>
+
+        <div class="mt-6 flex gap-4 items-center">
+          <a href="#contacto" class="btn-cobre inline-flex items-center gap-3">
+            Contáctanos
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#servicios" class="text-sm text-stone-600 hover:text-[#3A5A40] transition">Ver servicios →</a>
+        </div>
+
+        <div class="mt-8 flex gap-4">
+          <div class="inline-flex items-center gap-3 bg-white p-3 rounded-lg shadow-md">
+            <img src="https://cdn-icons-png.flaticon.com/512/2891/2891545.png" class="w-8 h-8" alt="">
+            <div>
+              <div class="text-sm font-semibold text-[#3A5A40]">Soporte 24/7</div>
+              <div class="text-xs text-stone-500">Respuesta rápida y seguimiento</div>
+            </div>
+          </div>
+
+          <div class="inline-flex items-center gap-3 bg-white p-3 rounded-lg shadow-md">
+            <img src="https://cdn-icons-png.flaticon.com/512/3595/3595454.png" class="w-8 h-8" alt="">
+            <div>
+              <div class="text-sm font-semibold text-[#3A5A40]">Seguridad</div>
+              <div class="text-xs text-stone-500">Auditorías y hardening</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual hero panel -->
+      <div class="relative flex justify-center" data-aos="fade-left" data-aos-duration="700">
+        <!-- Soft background shapes -->
+        <div class="absolute w-72 h-72 rounded-xl" style="background: radial-gradient(circle at 10% 10%, rgba(58,90,64,0.12), transparent 30%); filter: blur(18px); transform: rotate(10deg); top: -40px; left: -20px;"></div>
+        <div class="absolute w-56 h-56 rounded-xl" style="background: radial-gradient(circle at 90% 90%, rgba(184,115,51,0.08), transparent 30%); filter: blur(12px); transform: rotate(-6deg); bottom: -20px; right: -10px;"></div>
+
+        <div class="relative bg-white rounded-2xl shadow-2xl p-6 w-full max-w-md transform transition-all hover:scale-[1.01]">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-xs text-stone-400">Panel demo</div>
+              <div class="text-lg font-semibold text-[#3A5A40]">Visión general</div>
+            </div>
+            <div class="text-sm text-stone-500">Últ. actualización: 2h</div>
+          </div>
+
+          <div class="mt-4 grid grid-cols-2 gap-4">
+            <div class="p-3 rounded-lg bg-[#EAF5EE]">
+              <div class="text-xs text-stone-500">Usuarios</div>
+              <div class="text-xl font-bold">1.234</div>
+            </div>
+            <div class="p-3 rounded-lg bg-[#FFF4EB]">
+              <div class="text-xs text-stone-500">Tickets</div>
+              <div class="text-xl font-bold">24</div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <div class="h-28 bg-gradient-to-r from-[#DDECE3] to-[#FFF6EE] rounded-lg flex items-end p-3">
+              <div class="w-full h-14 bg-white/60 rounded-md"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" class="py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <h3 class="text-3xl font-bold text-center text-[#3A5A40]" data-aos="fade-up">Nuestros Servicios</h3>
+      <p class="text-center text-stone-600 mt-3 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="80">Soluciones integrales: desarrollo, integraciones, seguridad y soporte pensado para empresas que quieren crecer.</p>
+
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1 -->
+        <article class="card" data-aos="fade-up" data-aos-delay="120">
+          <img src="https://cdn-icons-png.flaticon.com/512/2721/2721293.png" class="w-14 h-14 mx-auto" alt="">
+          <h4 class="mt-4 text-lg font-semibold text-[#3A5A40]">Desarrollo Web</h4>
+          <p class="mt-2 text-sm text-stone-600">Sitios rápidos, accesibles y con foco en conversión.</p>
+          <a href="desarrolloweb.html" class="mt-4 inline-block text-sm font-semibold hover:underline text-[#3A5A40]">Saber más →</a>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card" data-aos="fade-up" data-aos-delay="160">
+          <img src="https://cdn-icons-png.flaticon.com/512/4228/4228720.png" class="w-14 h-14 mx-auto" alt="">
+          <h4 class="mt-4 text-lg font-semibold text-[#3A5A40]">Software a Medida</h4>
+          <p class="mt-2 text-sm text-stone-600">Automatizaciones y aplicaciones internas adaptadas a tu flujo.</p>
+          <a href="softwaremedida.html" class="mt-4 inline-block text-sm font-semibold hover:underline text-[#3A5A40]">Saber más →</a>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card" data-aos="fade-up" data-aos-delay="200">
+          <img src="https://cdn-icons-png.flaticon.com/512/1048/1048943.png" class="w-14 h-14 mx-auto" alt="">
+          <h4 class="mt-4 text-lg font-semibold text-[#3A5A40]">Ciberseguridad</h4>
+          <p class="mt-2 text-sm text-stone-600">Auditorías, hardening y protección proactiva.</p>
+          <a href="ciberseguridad.html" class="mt-4 inline-block text-sm font-semibold hover:underline text-[#3A5A40]">Saber más →</a>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="card" data-aos="fade-up" data-aos-delay="240">
+          <img src="https://cdn-icons-png.flaticon.com/512/4727/4727425.png" class="w-14 h-14 mx-auto" alt="">
+          <h4 class="mt-4 text-lg font-semibold text-[#3A5A40]">Soporte Técnico</h4>
+          <p class="mt-2 text-sm text-stone-600">Mantenimiento y resolución para que tu empresa nunca pare.</p>
+          <a href="soportetecnico.html" class="mt-4 inline-block text-sm font-semibold hover:underline text-[#3A5A40]">Saber más →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE NOSOTROS -->
+  <section id="sobre" class="bg-[#F7F7F6] py-16">
+    <div class="max-w-5xl mx-auto px-6 text-center" data-aos="fade-up">
+      <h3 class="text-3xl font-bold text-[#3A5A40]">Sobre Nosotros</h3>
+      <p class="mt-4 text-stone-700">En <strong>Yemos</strong> combinamos experiencia técnica y creatividad para transformar procesos en ventajas competitivas. Trabajamos de forma cercana con nuestros clientes y entregamos soluciones prácticas, seguras y escalables.</p>
+      <div class="mt-6 flex justify-center gap-4">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-[#3A5A40]">+10</div>
+          <div class="text-xs text-stone-500">Proyectos completados</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-[#3A5A40]">24/7</div>
+          <div class="text-xs text-stone-500">Soporte & monitorización</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-[#3A5A40]">Seguridad</div>
+          <div class="text-xs text-stone-500">Auditorías periódicas</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="py-16">
+    <div class="max-w-3xl mx-auto px-6" data-aos="zoom-in">
+      <h3 class="text-3xl font-bold text-center text-[#3A5A40]">Contáctanos</h3>
+      <p class="text-center text-stone-600 mt-2">Cuéntanos tu proyecto y te proponemos la mejor solución.</p>
+
+      <form id="contact-form" class="mt-8 bg-white p-6 rounded-xl shadow-lg grid gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input id="name" type="text" placeholder="Nombre" required class="input-field">
+          <input id="email" type="email" placeholder="Correo electrónico" required class="input-field">
+        </div>
+        <textarea id="message" placeholder="Mensaje" rows="5" required class="input-field"></textarea>
+
+        <div class="flex gap-3">
+          <button type="submit" class="btn-cobre px-5 py-2 rounded-md">Enviar mensaje</button>
+          <button type="button" id="clear-btn" class="px-5 py-2 rounded-md border border-stone-200">Borrar</button>
+        </div>
+
+        <div id="form-status" class="text-sm text-stone-500 hidden">Mensaje enviado. Te contactamos pronto.</div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#3A5A40] text-stone-100 py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <p>&copy; <span id="year"></span> Yemos. Sembramos innovación.</p>
+    </div>
+  </footer>
+
+  <!-- YEMI CHAT (pequeño widget) -->
+  <div id="yemi-container" class="fixed right-6 bottom-6 z-50">
+    <div id="yemi-button" class="w-14 h-14 rounded-full shadow-lg flex items-center justify-center cursor-pointer transition-transform hover:scale-105" title="Abrir Yemi" aria-label="Abrir chat">
+      <div class="w-14 h-14 rounded-full bg-gradient-to-br from-[#B87333] to-[#9c5a22] flex items-center justify-center text-white font-bold">💬</div>
+    </div>
+
+    <div id="yemi-window" class="hidden mt-3 w-80 bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div class="flex items-center justify-between px-4 py-3 border-b">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-[#3A5A40] text-white flex items-center justify-center">Y</div>
+          <div>
+            <div class="font-semibold text-sm">Yemi - Asistente</div>
+            <div class="text-xs text-stone-400">¿En qué puedo ayudarte?</div>
+          </div>
+        </div>
+        <button id="yemi-close" class="text-stone-400 hover:text-stone-600">✖</button>
+      </div>
+
+      <div id="yemi-messages" class="p-3 h-48 overflow-y-auto text-sm space-y-2 bg-stone-50"></div>
+
+      <div class="p-3 border-t">
+        <div class="flex gap-2">
+          <input id="yemi-text" type="text" placeholder="Escribe tu mensaje..." class="flex-1 p-2 rounded-lg border focus:ring-2 focus:ring-[#3A5A40]">
+          <button id="yemi-send" class="px-3 py-2 rounded-lg bg-[#3A5A40] text-white">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="script.js"></script>
+  <script>
+    // Inicializa AOS
+    document.addEventListener('DOMContentLoaded', function () {
+      AOS.init({ once: true, duration: 600, easing: 'ease-out-cubic' });
+    });
+  </script>
+</body>
+</html>

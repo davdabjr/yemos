@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acceso Clientes - Yemos</title>
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* 🌿 Base */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(270deg, #EAF5EE, #FFF4EB, #EAF5EE);
+      background-size: 400% 400%;
+      animation: gradientBG 30s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 🌟 Líneas diagonales de fondo */
+    .bg-lines {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(58,90,64,0.05) 0px,
+        rgba(58,90,64,0.05) 1px,
+        rgba(184,115,51,0.03) 1px,
+        rgba(184,115,51,0.03) 20px
+      );
+      z-index: 0;
+      pointer-events: none;
+      animation: moveLines 60s linear infinite;
+    }
+
+    @keyframes moveLines {
+      0% { transform: translate(0,0) rotate(0deg); }
+      50% { transform: translate(-10%,10%) rotate(3deg); }
+      100% { transform: translate(0,0) rotate(0deg); }
+    }
+
+    /* 🌊 Burbujas flotantes */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(58,90,64,0.25), rgba(184,115,51,0.15));
+      opacity: 0.3;
+      pointer-events: none;
+      transform: translate3d(0,0,0);
+    }
+
+    @keyframes floatBubble {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      10% { opacity: 0.3; }
+      50% { opacity: 0.2; }
+      100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+    }
+
+    /* ✨ Destellos y partículas sutiles */
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.5;
+      animation: drift 20s linear infinite;
+    }
+
+    @keyframes drift {
+      0% { transform: translate(0,0) scale(1); opacity: 0.5; }
+      50% { transform: translate(100px, -50px) scale(1.5); opacity: 0.2; }
+      100% { transform: translate(0,0) scale(1); opacity: 0.5; }
+    }
+
+    header {
+      background-color: rgba(58,90,64,0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      color: white;
+      position: relative;
+      z-index: 2;
+    }
+
+    header img { height: 40px; }
+
+    .login-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .login-box {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      padding: 40px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .login-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+    }
+
+    .login-box h2 { color: #3A5A40; margin-bottom: 25px; }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .login-box input:focus {
+      border-color: #B87333;
+      box-shadow: 0 0 8px rgba(184,115,51,0.35);
+      outline: none;
+    }
+
+    .login-box button {
+      background-color: #D97706;
+      color: white;
+      border: none;
+      padding: 12px 0;
+      width: 60%;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 15px;
+    }
+
+    .login-box button:hover {
+      background-color: #b66204;
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      text-align: center;
+      color: #555;
+      font-size: 14px;
+      margin-top: 25px;
+    }
+
+    a {
+      color: #3A5A40;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #B87333;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fondo líneas y partículas -->
+  <div class="bg-lines"></div>
+
+  <header>
+    <img src="images/logo.png" alt="Yemos Logo" />
+    <h3>Acceso Clientes</h3>
+  </header>
+
+  <section class="login-container">
+    <div class="login-box">
+      <h2>Inicia sesión</h2>
+      <input type="email" id="email" placeholder="Correo electrónico" required />
+      <input type="password" id="password" placeholder="Contraseña" required />
+      <div style="display: flex; justify-content: center;">
+        <button id="loginBtn">Entrar</button>
+      </div>
+      <p class="footer">¿No tienes cuenta? <a href="#">Solicita acceso</a></p>
+    </div>
+  </section>
+
+  <!-- Burbujas animadas -->
+  <div class="bubble" style="width: 80px; height: 80px; left: 10%; animation-duration: 25s;"></div>
+  <div class="bubble" style="width: 50px; height: 50px; left: 30%; animation-duration: 18s;"></div>
+  <div class="bubble" style="width: 100px; height: 100px; left: 60%; animation-duration: 22s;"></div>
+  <div class="bubble" style="width: 60px; height: 60px; left: 80%; animation-duration: 30s;"></div>
+  <div class="bubble" style="width: 40px; height: 40px; left: 50%; animation-duration: 20s;"></div>
+
+  <!-- Partículas premium -->
+  <div class="particle" style="top:10%; left:20%; animation-delay: 0s;"></div>
+  <div class="particle" style="top:30%; left:70%; animation-delay: 5s;"></div>
+  <div class="particle" style="top:50%; left:40%; animation-delay: 2s;"></div>
+  <div class="particle" style="top:80%; left:60%; animation-delay: 8s;"></div>
+  <div class="particle" style="top:20%; left:50%; animation-delay: 3s;"></div>
+
+  <script type="module" src="firebase.js"></script>
+  <script>
+    // Animación de burbujas flotando + movimiento suave
+    const bubbles = document.querySelectorAll('.bubble');
+    bubbles.forEach(b => {
+      b.animate([
+        { transform: 'translateY(100vh) scale(0.5)', opacity: 0 },
+        { transform: 'translateY(-20vh) scale(1)', opacity: 0.3 }
+      ], {
+        duration: parseFloat(b.style.animationDuration)*1000,
+        iterations: Infinity
+      });
+    });
+
+    // Movimiento sutil de burbujas al mover el mouse
+    document.addEventListener('mousemove', e => {
+      const x = e.clientX;
+      const y = e.clientY;
+      bubbles.forEach((b, i) => {
+        const speed = (i+1)/100;
+        const offsetX = (x - window.innerWidth/2) * speed;
+        const offsetY = (y - window.innerHeight/2) * speed;
+        b.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+      });
+    });
+  </script>
+</body>
+</html>

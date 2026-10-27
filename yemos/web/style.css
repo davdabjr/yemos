@@ -1,0 +1,144 @@
+/* ============================================================
+   YEMOS – STYLE CLEAN + ANIMATIONS (Opción C)
+   ============================================================ */
+
+/* 🌿 Paleta Yemos */
+:root {
+  --color-primary: #3A5A40;
+  --color-primary-dark: #1F3C2D;
+  --color-secondary: #B87333;
+  --color-secondary-dark: #9e5a24;
+  --color-bg: #F5F5F4;
+  --color-text: #1E293B;
+}
+
+/* 🧼 Reset y base */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-text);
+  transition: background-color 0.3s ease;
+}
+
+/* ✨ Microtransiciones globales */
+a, button, input, textarea {
+  transition: all 0.3s ease;
+}
+
+/* ============================================================
+   BOTÓN COBRE PREMIUM
+   ============================================================ */
+.btn-cobre {
+  background: var(--color-secondary);
+  color: white !important;
+  padding: 0.7rem 1.4rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.btn-cobre:hover {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+  box-shadow: 0 6px 16px rgba(184,115,51,0.45);
+  transform: translateY(-3px);
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+header {
+  backdrop-filter: blur(6px);
+}
+
+header.scrolled {
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#inicio {
+  background: linear-gradient(100deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  animation: fadeHero 1.2s ease forwards;
+}
+
+@keyframes fadeHero {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   TARJETAS DE SERVICIOS
+   ============================================================ */
+.service-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transition: all 0.35s ease;
+  transform: translateY(0);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+
+.service-card img {
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover img {
+  transform: scale(1.05);
+}
+
+/* ============================================================
+   SECCIONES ANIMADAS (AOS)
+   ============================================================ */
+[data-aos] {
+  opacity: 0;
+  transition-property: transform, opacity;
+}
+
+/* ============================================================
+   FORMULARIO
+   ============================================================ */
+input, textarea {
+  background: white;
+  border: 1px solid #d7d7d7;
+  border-radius: 8px;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(58, 90, 64, 0.25);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--color-primary);
+  color: #e8e8e8;
+}
+
+/* ============================================================
+   BOTÓN YEMI CHAT (mejora)
+   ============================================================ */
+#yemi-button {
+  animation: floatYemi 3s ease-in-out infinite;
+}
+
+@keyframes floatYemi {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}

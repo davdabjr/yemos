@@ -1,0 +1,29 @@
+{
+  "servicios": {
+    "nuevo": "Para contratar un nuevo servicio, ve a Servicios → Nuevo Servicio y sigue las instrucciones, o bien puedes enviar un correo a info@yemos.es",
+    "problema": "Lamento que tengas problemas con tu servicio. Por favor, abre un ticket desde Soporte → Nuevo Ticket o envía un correo a soporte@yemos.es",
+    "cancelar": "Para cancelar un servicio, tendrás que escribir un correo a soporte@yemos.es"
+  },
+
+  "finanzas": {
+    "facturas": "Puedes ver tus facturas desde tu panel: Finanzas → Facturación. Si necesitas descargar una factura antigua, avísame.",
+    "creditos": "Para ampliar créditos ve a Finanzas → Créditos. Si necesitas un plan personalizado, puedo pedir que un Yemo de finanzas te contacte, o bien puedes enviar un correo a finanzas@yemos.es",
+    "pagos": "Tus métodos de pago están en Finanzas → Métodos de pago."
+  },
+
+  "it": {
+    "ordenador_lento": "Prueba a reiniciar el equipo y revisar el Administrador de tareas → Procesos. Si el problema sigue, puedo generar un ticket para IT.",
+    "conexion": "Comprueba el cable de red o intenta reiniciar el router. Si estás en WiFi, acércate al punto de acceso.",
+    "vpn": "Puedes descargar la VPN desde el panel de IT → Recursos. Si no funciona, te ayudo a configurarla."
+  },
+
+  "usuario": {
+    "soporte": "Para contactar con un Yemo, abre un ticket desde Soporte → Nuevo Ticket. Si lo prefieres, puedes enviar un ticket a soporte@yemos.es y te responderán lo más pronto posible",
+    "ayuda_panel": "Tu panel principal muestra tus servicios activos, facturas, créditos y tickets abiertos."
+  },
+
+  "general": {
+    "saludo": "¡Hola! Soy Yemi, tu asistente de Yemos. ¿En qué puedo ayudarte hoy?",
+    "no_entendido": "No estoy seguro de haber entendido eso. ¿Puedes explicarlo con otras palabras?"
+  }
+}

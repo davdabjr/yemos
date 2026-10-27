@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Servicios - Yemos (SIEM View)</title>
+  <link href="style.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="icon" href="images/logo.png" />
+  <style>
+    body { background: #fafafa; }
+    .card-anim { transition: transform .25s ease, box-shadow .25s ease; }
+    .card-anim:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(16,24,40,0.08); }
+    .log-entry { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 13px; }
+    .badge { padding: .25rem .5rem; border-radius: .5rem; font-weight:600; font-size: .75rem; }
+    .scroll-area { max-height: 320px; overflow:auto; }
+    /* small responsive tweaks */
+    @media (min-width: 1024px) { .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+  </style>
+</head>
+<body class="text-stone-800 font-sans">
+
+  <!-- Header -->
+  <header class="bg-white shadow sticky top-0 z-40">
+    <nav class="max-w-7xl mx-auto p-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="images/logo.png" alt="Yemos" class="w-8 h-8">
+        <h1 class="text-xl font-bold text-[#3A5A40]">Yemos — Monitor de Servicios (SIEM)</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <button class="btn-cobre px-4 py-2">Volver al portal</button>
+        <button id="refresh-btn" class="px-4 py-2 border rounded">Actualizar</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-6 space-y-6">
+
+    <!-- Top metrics -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-white p-4 rounded-xl shadow card-anim">
+        <h3 class="text-sm text-gray-500">Servicios online</h3>
+        <p class="text-2xl font-bold" id="online-services">--</p>
+        <p class="text-sm text-gray-500">/ total</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl shadow card-anim">
+        <h3 class="text-sm text-gray-500">Alertas críticas (24h)</h3>
+        <p class="text-2xl font-bold text-red-600" id="critical-alerts">--</p>
+        <p class="text-sm text-gray-500">Incidentes sin resolver</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl shadow card-anim">
+        <h3 class="text-sm text-gray-500">Uptime medio (30d)</h3>
+        <p class="text-2xl font-bold text-[#3A5A40]" id="avg-uptime">--%</p>
+        <p class="text-sm text-gray-500">Promedio por servicio</p>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl shadow card-anim">
+        <h3 class="text-sm text-gray-500">Eventos/Hora</h3>
+        <p class="text-2xl font-bold" id="events-hour">--</p>
+        <p class="text-sm text-gray-500">Logs procesados</p>
+      </div>
+    </section>
+
+    <!-- Panels: left - services + metrics, right - alerts & logs -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Left: services list + charts -->
+      <div class="lg:col-span-2 space-y-6">
+
+        <div class="bg-white p-6 rounded-xl shadow card-anim">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold">Servicios</h2>
+            <div class="flex items-center gap-3">
+              <select id="service-filter" class="border p-2 rounded">
+                <option value="all">Todos</option>
+                <option value="production">Producción</option>
+                <option value="staging">Staging</option>
+              </select>
+              <input id="search-service" placeholder="Buscar servicio" class="border p-2 rounded" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="services-cards"></div>
+        </div>
+
+        <!-- Charts row -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-white p-4 rounded-xl shadow card-anim">
+            <h3 class="text-sm text-gray-500 mb-3">Uptime (últimos 30 días)</h3>
+            <canvas id="uptimeChart" height="140"></canvas>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl shadow card-anim">
+            <h3 class="text-sm text-gray-500 mb-3">Uso CPU (últimas 12h)</h3>
+            <canvas id="cpuChart" height="140"></canvas>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl shadow card-anim">
+            <h3 class="text-sm text-gray-500 mb-3">Top alert types</h3>
+            <canvas id="alertsChart" height="140"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Alerts stream + Live logs -->
+      <div class="space-y-6">
+        <div class="bg-white p-4 rounded-xl shadow card-anim">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-semibold">Stream de alertas</h3>
+            <button id="clear-alerts" class="text-sm px-3 py-1 border rounded">Limpiar</button>
+          </div>
+          <div class="scroll-area divide-y" id="alerts-stream"></div>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl shadow card-anim">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-semibold">Logs en vivo</h3>
+            <div class="flex items-center gap-2">
+              <label class="text-sm text-gray-500">Nivel</label>
+              <select id="log-level" class="border p-1 rounded text-sm">
+                <option value="all">Todos</option>
+                <option value="info">Info</option>
+                <option value="warn">Warn</option>
+                <option value="error">Error</option>
+              </select>
+            </div>
+          </div>
+          <div class="scroll-area bg-black text-white p-3 rounded" id="live-logs"></div>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl shadow card-anim">
+          <h3 class="font-semibold mb-3">Mapa de servicios</h3>
+          <div class="w-full h-40 bg-stone-100 rounded flex items-center justify-center text-gray-400">Mapa (placeholder)</div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Footer actions -->
+    <section class="flex justify-between items-center">
+      <div class="text-sm text-gray-600">Última actualización: <span id="last-update">-</span></div>
+      <div class="flex gap-3">
+        <button id="export-csv" class="px-4 py-2 border rounded">Exportar CSV</button>
+        <button id="download-pdf" class="btn-cobre px-4 py-2">Descargar reporte</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Mock data
+    const SERVICES = [
+      { id: 'web-01', name: 'Hosting - cliente123', env: 'production', status: 'online', uptime: 99.99, cpu: 23 },
+      { id: 'db-01', name: 'Postgres - cliente123', env: 'production', status: 'degraded', uptime: 98.4, cpu: 56 },
+      { id: 'ci-01', name: 'CI Runner', env: 'staging', status: 'offline', uptime: 95.2, cpu: 12 },
+      { id: 'api-01', name: 'API Gateway', env: 'production', status: 'online', uptime: 99.6, cpu: 31 },
+      { id: 'auth-01', name: 'Auth Service', env: 'production', status: 'online', uptime: 99.8, cpu: 18 },
+      { id: 'cache-01', name: 'Redis Cache', env: 'staging', status: 'online', uptime: 99.1, cpu: 8 },
+    ];
+
+    // UI refs
+    const servicesCards = document.getElementById('services-cards');
+    const onlineEl = document.getElementById('online-services');
+    const criticalEl = document.getElementById('critical-alerts');
+    const uptimeEl = document.getElementById('avg-uptime');
+    const eventsHourEl = document.getElementById('events-hour');
+    const lastUpdateEl = document.getElementById('last-update');
+
+    // Render services
+    function renderServices(filter = 'all', query = ''){
+      servicesCards.innerHTML = '';
+      const list = SERVICES.filter(s => (filter==='all' || s.env===filter) && s.name.toLowerCase().includes(query.toLowerCase()));
+      list.forEach(s => {
+        const div = document.createElement('div');
+        div.className = 'p-4 rounded-xl border bg-white';
+        div.innerHTML = `
+          <div class="flex justify-between items-start">
+            <div>
+              <h4 class="font-semibold">${s.name}</h4>
+              <p class="text-sm text-gray-500">${s.env} • ${s.id}</p>
+            </div>
+            <div class="text-right">
+              <div class="text-sm font-medium">Uptime: <span class="text-[#3A5A40]">${s.uptime}%</span></div>
+              <div class="text-xs text-gray-500 mt-1">CPU: ${s.cpu}%</div>
+            </div>
+          </div>
+          <div class="mt-3 flex items-center justify-between">
+            <div>
+              ${s.status==='online'? '<span class="badge bg-green-100 text-green-800">Online</span>': s.status==='degraded'? '<span class="badge bg-yellow-100 text-yellow-800">Degraded</span>': '<span class="badge bg-red-100 text-red-800">Offline</span>'}
+            </div>
+            <div>
+              <button class="px-3 py-1 text-sm border rounded view-btn" data-id="${s.id}">Ver métricas</button>
+            </div>
+          </div>
+        `;
+        servicesCards.appendChild(div);
+      });
+      onlineEl.textContent = SERVICES.filter(s=>s.status==='online').length + ' / ' + SERVICES.length;
+      criticalEl.textContent = Math.floor(Math.random()*5);
+      const avg = (SERVICES.reduce((a,b)=>a+b.uptime,0)/SERVICES.length).toFixed(2);
+      uptimeEl.textContent = avg + '%';
+      eventsHourEl.textContent = Math.floor(Math.random()*1200)+200;
+      lastUpdateEl.textContent = new Date().toLocaleString();
+    }
+
+    // Filters
+    document.getElementById('service-filter').addEventListener('change', e=> renderServices(e.target.value, document.getElementById('search-service').value));
+    document.getElementById('search-service').addEventListener('input', e=> renderServices(document.getElementById('service-filter').value, e.target.value));
+
+    // Charts
+    const uptimeCtx = document.getElementById('uptimeChart');
+    const cpuCtx = document.getElementById('cpuChart');
+    const alertsCtx = document.getElementById('alertsChart');
+
+    function randomSeries(len, min=50, max=100){
+      return Array.from({length:len}, ()=> Math.round(Math.random()*(max-min)+min));
+    }
+
+    if(uptimeCtx){
+      new Chart(uptimeCtx, { type:'line', data:{ labels:Array.from({length:30}, (_,i)=>i+1), datasets:[{ label:'Uptime %', data: randomSeries(30,95,100), borderColor:'#3A5A40', tension:0.25, fill:true, backgroundColor:'rgba(58,90,64,0.08)'}] }, options:{ responsive:true, plugins:{legend:{display:false}} } });
+    }
+
+    if(cpuCtx){
+      new Chart(cpuCtx, { type:'bar', data:{ labels:Array.from({length:12}, (_,i)=>i+'h'), datasets:[{ label:'CPU %', data: randomSeries(12,5,80), backgroundColor:'#D97706' }] }, options:{ responsive:true, plugins:{legend:{display:false}}, scales:{ y:{ beginAtZero:true } } } });
+    }
+
+    if(alertsCtx){
+      new Chart(alertsCtx, { type:'doughnut', data:{ labels:['Auth','DB','Network','App'], datasets:[{ data:[12,7,5,3], backgroundColor:['#ef4444','#f59e0b','#3b82f6','#10b981'] }] }, options:{ responsive:true } });
+    }
+
+    // Alerts stream + live logs simulation
+    const alertsStream = document.getElementById('alerts-stream');
+    const liveLogs = document.getElementById('live-logs');
+
+    function pushAlert(text, level='info'){
+      const d = document.createElement('div');
+      d.className = 'p-3';
+      d.innerHTML = `<div class="text-sm"><strong>${new Date().toLocaleTimeString()}</strong> — <span class="text-${level==='error'?'red':'yellow'}-600">${level.toUpperCase()}</span></div><div class="text-sm text-gray-600">${text}</div>`;
+      alertsStream.prepend(d);
+      if(alertsStream.children.length>50) alertsStream.removeChild(alertsStream.lastChild);
+    }
+
+    function pushLog(line, level='info'){
+      const el = document.createElement('div');
+      el.className = 'log-entry py-1';
+      el.textContent = `[${new Date().toISOString()}] [${level.toUpperCase()}] ${line}`;
+      liveLogs.prepend(el);
+      if(liveLogs.children.length>200) liveLogs.removeChild(liveLogs.lastChild);
+    }
+
+    // Simulate events
+    setInterval(()=>{
+      const services = SERVICES[Math.floor(Math.random()*SERVICES.length)];
+      const types = ['error','warn','info'];
+      const t = types[Math.floor(Math.random()*types.length)];
+      pushLog(`${services.id}: simulated message (${t})`, t);
+      if(t!=='info' && Math.random()<0.3) pushAlert(`${services.name} reported ${t}`, t);
+    }, 1200);
+
+    // Controls
+    document.getElementById('clear-alerts').addEventListener('click', ()=> alertsStream.innerHTML='');
+    document.getElementById('refresh-btn').addEventListener('click', ()=> renderServices(document.getElementById('service-filter').value, document.getElementById('search-service').value));
+    document.getElementById('export-csv').addEventListener('click', ()=> exportCSV());
+    document.getElementById('download-pdf').addEventListener('click', ()=> alert('Generando PDF... (placeholder)'));
+
+    document.getElementById('log-level').addEventListener('change', (e)=>{
+      // simple filter: hide/show logs by level (client-side simulated)
+      const lvl = e.target.value;
+      Array.from(liveLogs.children).forEach(c=>{ if(lvl==='all') c.style.display='block'; else c.style.display = c.textContent.includes(lvl.toUpperCase())? 'block':'none'; });
+    });
+
+    function exportCSV(){
+      const rows = [['id','name','env','status','uptime','cpu']].concat(SERVICES.map(s=>[s.id,s.name,s.env,s.status,s.uptime,s.cpu]));
+      const csv = rows.map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
+      const blob = new Blob([csv], {type:'text/csv'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download='services.csv'; a.click(); URL.revokeObjectURL(url);
+    }
+
+    // init
+    renderServices();
+  </script>
+
+</body>
+</html>
